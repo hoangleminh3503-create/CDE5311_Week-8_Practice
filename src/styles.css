@@ -1,0 +1,548 @@
+/* ---------- Tokens (from the Figma variables and frame inspection) ---------- */
+:root {
+  --color-bg: #fffcf2; /* Background Color */
+  --color-surface: #fefefe; /* neutral-white */
+  --color-header: #fff;
+  --color-primary: #415b51; /* Primary Color */
+  --color-secondary: #d2a35d; /* Secondary Color */
+  --color-tertiary: #a8ba6d; /* Tiertiary Color (sic) */
+  --color-text-secondary: #4f6154;
+  --color-track: #e7e8e2;
+  --color-tint: #ebeeea;
+  --color-border: #d9d9d9;
+  --color-primary-40: rgba(65, 91, 81, 0.4);
+
+  --radius-card: 16px;
+  --radius-control: 10px;
+  --radius-bar: 3px;
+
+  --space-gutter: 20px;
+  --space-section: 24px;
+
+  /* Silom ships with Apple OSes only; the fallback keeps the chunky feel elsewhere. */
+  --font-display: "Silom", "Arial Rounded MT Bold", "Trebuchet MS", system-ui,
+    sans-serif;
+  --font-body: "Palanquin", system-ui, sans-serif;
+  --font-ui: "Inter", system-ui, sans-serif;
+  --font-system: -apple-system, "SF Pro", system-ui, sans-serif;
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+body {
+  background: #e9e5d6; /* only visible beside the phone column on wide screens */
+  font-family: var(--font-body);
+  color: var(--color-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+p,
+h1 {
+  margin: 0;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* ---------- App shell: 402px column, full width on phones ---------- */
+.app {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 402px;
+  min-height: 100dvh;
+  margin: 0 auto;
+  background: var(--color-bg);
+}
+
+@media (min-width: 480px) {
+  .app {
+    box-shadow: 0 0 0 1px rgba(65, 91, 81, 0.12), 0 12px 40px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.screen-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-section);
+  padding: 12px var(--space-gutter) var(--space-section);
+}
+
+/* ---------- Status bar ---------- */
+.status-bar {
+  display: flex;
+  align-items: center;
+  height: 62px;
+  padding: 2px 9px 0;
+}
+
+.status-bar__time {
+  flex: 1;
+  padding-right: 6px;
+  text-align: center;
+  font-family: var(--font-system);
+  font-weight: 590;
+  font-size: 17px;
+  line-height: 22px;
+  color: #000;
+}
+
+.status-bar__island {
+  flex: none;
+  width: 125px;
+  height: 37px;
+  border-radius: 100px;
+  background: #000;
+}
+
+.status-bar__icons {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.status-bar__icons img {
+  display: block;
+  width: 77.3px;
+  height: 13px;
+}
+
+/* ---------- Header ---------- */
+.app-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 54px;
+  background: var(--color-header);
+}
+
+.app-header__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 24px;
+  color: var(--color-primary);
+}
+
+.app-header__back {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 25px;
+  height: 25px;
+  padding: 0;
+  border: 0;
+  background: none;
+  transform: translateY(-50%);
+}
+
+.app-header__back:disabled {
+  cursor: default;
+}
+
+.app-header__back img {
+  width: 16px;
+  height: 16px;
+}
+
+/* ---------- Step indicator ---------- */
+.step-indicator {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px var(--space-gutter) 12px;
+}
+
+.step-indicator__label {
+  font-size: 12px;
+  line-height: 14px;
+  color: var(--color-text-secondary);
+}
+
+.step-indicator__bar-inset {
+  padding: 1px 16px;
+}
+
+.step-indicator__track {
+  height: 6px;
+  overflow: hidden;
+  border-radius: var(--radius-bar);
+  background: var(--color-track);
+}
+
+.step-indicator__fill {
+  height: 100%;
+  border-radius: var(--radius-bar);
+  background: var(--color-primary);
+}
+
+/* ---------- AI info card ---------- */
+.ai-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border-radius: var(--radius-control);
+  background: var(--color-secondary);
+  color: var(--color-surface);
+}
+
+.ai-card__title {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.ai-card__text {
+  font-size: 12px;
+  line-height: 14px;
+}
+
+/* ---------- Buttons ---------- */
+.button-row {
+  display: flex;
+  gap: 12px;
+}
+
+.outline-button {
+  flex: 1;
+  height: 48px;
+  padding: 4px 11px 5px;
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-control);
+  background: var(--color-surface);
+  font-size: 16px;
+  color: var(--color-primary);
+}
+
+.footer {
+  position: sticky;
+  bottom: 0;
+  padding: 16px var(--space-gutter) 30px;
+  background: var(--color-surface);
+}
+
+.continue-button {
+  display: block;
+  width: 100%;
+  height: 48px;
+  padding: 4px 11px 5px;
+  border: 0;
+  border-radius: var(--radius-control);
+  background: var(--color-primary); /* enabled: inferred, not in Figma */
+  font-size: 16px;
+  color: var(--color-bg);
+}
+
+.continue-button:disabled {
+  background: var(--color-primary-40);
+  cursor: not-allowed;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 2px;
+}
+
+/* ---------- Add product: upload zone ---------- */
+.upload-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  height: 300px;
+  padding: 0 16px;
+  border: 1.2px dashed var(--color-primary-40);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+}
+
+.upload-zone__icon {
+  display: grid;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: var(--color-tint);
+}
+
+.upload-zone__icon img {
+  width: 56px;
+  height: 56px;
+}
+
+.upload-zone__hint {
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+/* ---------- Scanning photo ---------- */
+.scan-preview {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--color-tint);
+}
+
+.scan-preview__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.scan-preview__badge {
+  position: absolute;
+  top: 14px;
+  left: 48px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: var(--color-primary);
+  font-family: var(--font-ui);
+  font-size: 12px;
+  line-height: 14px;
+  color: var(--color-surface);
+}
+
+.scan-preview__sparkle {
+  position: absolute;
+  background: var(--color-secondary);
+  animation: twinkle 1.6s ease-in-out infinite;
+}
+
+.scan-preview__sparkle--lg {
+  top: 17px;
+  right: 48px;
+  width: 20px;
+  height: 20px;
+}
+
+.scan-preview__sparkle--sm {
+  top: 38px;
+  right: 77px;
+  width: 10px;
+  height: 10px;
+  opacity: 0.64;
+  animation-delay: 0.5s;
+}
+
+.scan-preview__line {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  top: 273px;
+  height: 2px;
+  background: var(--color-tertiary);
+  box-shadow: 0 0 7px 2px rgba(168, 186, 109, 0.45);
+  opacity: 0.79;
+  animation: scan 2.4s ease-in-out infinite alternate;
+}
+
+.scan-preview__corner {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border: 0 solid var(--color-primary);
+}
+
+.scan-preview__corner--tl {
+  top: 14px;
+  left: 14px;
+  border-width: 1.8px 0 0 1.8px;
+}
+
+.scan-preview__corner--tr {
+  top: 14px;
+  right: 14px;
+  border-width: 1.8px 1.8px 0 0;
+}
+
+.scan-preview__corner--bl {
+  bottom: 14px;
+  left: 14px;
+  border-width: 0 0 1.8px 1.8px;
+}
+
+.scan-preview__corner--br {
+  bottom: 14px;
+  right: 14px;
+  border-width: 0 1.8px 1.8px 0;
+}
+
+.scan-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.scan-status__title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--color-primary);
+}
+
+.scan-status__dots {
+  display: flex;
+  gap: 10px;
+}
+
+.scan-status__dots span {
+  width: 7px;
+  height: 7px;
+  background: var(--color-primary);
+  opacity: 0.3;
+  animation: dot 1.2s ease-in-out infinite;
+}
+
+.scan-status__dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.scan-status__dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes scan {
+  from {
+    top: 38px;
+  }
+  to {
+    top: 273px;
+  }
+}
+
+@keyframes twinkle {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes dot {
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scan-preview__sparkle,
+  .scan-preview__line,
+  .scan-status__dots span {
+    animation: none;
+  }
+}
+
+/* ---------- Product details ---------- */
+.screen-body--form {
+  gap: 24px;
+}
+
+.product-identity {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.product-identity__photo {
+  flex: none;
+  width: 76px;
+  height: 76px;
+  border-radius: var(--radius-card);
+  object-fit: cover;
+}
+
+.product-identity__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.product-identity__farm {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: var(--color-primary);
+}
+
+.product-identity__hint {
+  font-size: 12px;
+  line-height: 14px;
+  color: var(--color-text-secondary);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.field__label {
+  font-family: var(--font-display);
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--color-primary);
+}
+
+.field__input {
+  width: 100%;
+  height: 46px;
+  padding: 0 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 0;
+  background: var(--color-surface);
+  font-size: 14px;
+  color: var(--color-primary);
+}
+
+.verification {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.verification__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  color: var(--color-primary);
+}
+
+.verification__box {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  accent-color: var(--color-primary);
+}
+
+.verification__hint {
+  font-size: 12px;
+  line-height: 14px;
+  color: var(--color-text-secondary);
+}
